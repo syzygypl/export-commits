@@ -19,7 +19,9 @@ export_diff() {
 }
 
 export_project() {
-    declare project="$1" author="$2" since="$3" until="$4"
+    declare project="$1" since="$2" until="$3"
+    
+    local author="$(git -C "$project" config user.email)"
 
     git -C "$project" log --no-merges --format='%H' \
         --since "$since" --until "$until" --author "$author" \
@@ -42,9 +44,9 @@ main() {
         return 1
     fi 
 
-    local author="$(git config user.email)" since="${month}-01" until="$(calculate_period "$month")"
+    local since="${month}-01" until="$(calculate_period "$month")"
 
-    echo "Exporting ${author}’s commits for ${since} -- ${until}"
+    echo "Exporting commits for ${since} -- ${until}"
 
     rm -fr ./output
 
@@ -61,7 +63,7 @@ main() {
         fi
 
         echo " ✔ ︎$(basename "$name")"
-        export_project "$name" "$author" "$since" "$until"
+        export_project "$name" "$since" "$until"
     done
 }
 
