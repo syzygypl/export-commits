@@ -23,7 +23,7 @@ export_project() {
     
     local author="$(git -C "$project" config user.email)"
 
-    git -C "$project" log --no-merges --format='%H' \
+    git -C "$project" log --no-merges --format='%H' --branches \
         --since "$since" --until "$until" --author "$author" \
     | while read hash ; do
         export_diff "$project" "$hash"
