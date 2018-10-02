@@ -1,1 +1,14 @@
-echo 1
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
+set +e
+
+source "./scheduling"
+
+determine_scheduled
+
+echo "Exporting commits for $scheduled_for_now"
+./export "$scheduled_for_now"
+echo "Publishing for $scheduled_for_now"
+./publish "$scheduled_for_now"
+
+remember_last_export

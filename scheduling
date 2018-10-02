@@ -1,0 +1,35 @@
+MAIN="$HOME/.export-commits"
+LAST_EXPORT_CACHE="$MAIN/last_export"
+
+get_scheduled_for_now() {
+    scheduled_for_now="`date -v-30d +'%Y-%m'`"
+    if [ -z ${scheduled_for_now+x} ]; then
+        error "cannot determine scheduled date";
+    fi
+}
+
+get_last_export() {
+    last_export="`cat $LAST_EXPORT_CACHE`"
+    if [ -z ${last_export+x} ]; then
+        error "cannot determine last export";
+    fi
+}
+
+determine_scheduled() {
+    get_scheduled_for_now
+    get_last_export
+    echo "Scheduled for now: $scheduled_for_now";
+    echo "Last export was for: $last_export";
+    if [ "$last_export" = "$scheduled_for_now" ]; then
+        error "This scheduled export is already done";
+    fi
+}
+
+remember_last_export() {
+    echo "Saving last export: $scheduled_for_now";
+    echo "$scheduled_for_now" > "$LAST_EXPORT_CACHE";
+}
+
+error() {
+    echo "$1"; exit;
+}

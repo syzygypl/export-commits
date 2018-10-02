@@ -1,3 +1,5 @@
+
+
 # Export commit history
 
 Exports all your commits (by email configured in git) from given projects into `output` directory
@@ -28,3 +30,7 @@ echo my-private-project >>excluded.txt
 ```
 ./export "2017-10"
 ```
+
+## Development
+
+Dont use single `rm` in file called publishing - it may result in whole smb server destruction :)

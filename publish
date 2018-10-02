@@ -9,22 +9,22 @@ MOUNT_SHARE="Projekty"
 MOUNT="$MOUNT_NAME/$MOUNT_SHARE"
 
 credentials() {
-    NAME="`security find-internet-password -gs $MOUNT_NAME 2>null | grep 'acct' | cut -c 19- | tr -d '"' | tr -d '\n'`"
+    NAME="`security find-internet-password -gs $MOUNT_NAME 2>/dev/null | grep 'acct' | cut -c 19- | tr -d '"' | tr -d '\n'`"
     PASS="`security find-internet-password -gs $MOUNT_NAME -w`"
 }
 
 mount() {
     umount "$MOUNT_POINT"
-    rm -rf "$MOUNT_POINT"
     mkdir "$MOUNT_POINT"
     mount_smbfs "//$NAME:$PASS@$MOUNT" "$MOUNT_POINT"
 }
 
 export() {
+    schedule=$1
     mkdir "$MOUNT_POINT/$EXPORT_PATH_PREFIX"
-    rm -rf "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$PERSON_NAME"
     mkdir "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$PERSON_NAME"
-    cp -a "$LOCATION/." "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$PERSON_NAME"
+    mkdir "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$PERSON_NAME/$schedule"
+    cp -a "$LOCATION/." "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$PERSON_NAME/$schedule"
 }
 
 testing_output() {
@@ -33,9 +33,10 @@ testing_output() {
 }
 
 main() {
+    schedule=$1
     credentials
     mount
-    export
+    export ${schedule};
 }
 
 main "$@"
