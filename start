@@ -4,6 +4,9 @@ set +e
 
 source "./scheduling"
 
+echo "Pulling last repository version"
+git pull
+
 determine_scheduled
 
 echo "Exporting commits for $scheduled_formatted"
