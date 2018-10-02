@@ -6,9 +6,9 @@ source "./scheduling"
 
 determine_scheduled
 
-echo "Exporting commits for $scheduled_for_now"
-./export "$scheduled_for_now"
-echo "Publishing for $scheduled_for_now"
-./publish "$scheduled_for_now"
+echo "Exporting commits for $scheduled_formatted"
+./export "$scheduled_formatted"
+echo "Publishing for $scheduled"
+./publish "$scheduled" "$scheduled_year"
 
 remember_last_export

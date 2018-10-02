@@ -2,7 +2,7 @@ MAIN="$HOME/.export-commits"
 MOUNT_POINT="$MAIN/mount"
 LOCATION="$MAIN/output"
 
-EXPORT_PATH_PREFIX="Dowodowki/IT"
+EXPORT_PATH_PREFIX="Dowodowki/DIGITAL"
 PERSON_NAME="DIMA"
 MOUNT_NAME="nelson"
 MOUNT_SHARE="Projekty"
@@ -21,10 +21,12 @@ mount() {
 
 export() {
     schedule=$1
+    scheduled_year=$2
     mkdir "$MOUNT_POINT/$EXPORT_PATH_PREFIX"
-    mkdir "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$PERSON_NAME"
-    mkdir "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$PERSON_NAME/$schedule"
-    cp -a "$LOCATION/." "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$PERSON_NAME/$schedule"
+    mkdir "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$scheduled_year"
+    mkdir "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$scheduled_year/$schedule"
+    mkdir "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$scheduled_year/$schedule/$PERSON_NAME"
+    cp -a "$LOCATION/." "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$scheduled_year/$schedule/$PERSON_NAME"
 }
 
 testing_output() {
@@ -34,9 +36,10 @@ testing_output() {
 
 main() {
     schedule=$1
+    scheduled_year=$2
     credentials
     mount
-    export ${schedule};
+    export ${schedule} ${scheduled_year};
 }
 
 main "$@"
