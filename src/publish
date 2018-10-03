@@ -1,10 +1,10 @@
 MAIN="$HOME/.export-commits"
 LOCATION="$MAIN/output"
 
-EXPORT_PATH_PREFIX="Dowodowki/DIGITAL"
+EXPORT_PATH_PREFIX="DIGITAL"
 PERSON_NAME="DIMA"
 MOUNT_NAME="nelson"
-MOUNT_SHARE="Projekty"
+MOUNT_SHARE="Dowodowki"
 MOUNT="$MOUNT_NAME/$MOUNT_SHARE"
 
 determine_mount_point() {
@@ -22,10 +22,7 @@ mount_smb() {
 export() {
     schedule=$1
     scheduled_year=$2
-    mkdir "$MOUNT_POINT/$EXPORT_PATH_PREFIX"
-    mkdir "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$scheduled_year"
-    mkdir "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$scheduled_year/$schedule"
-    mkdir "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$scheduled_year/$schedule/$PERSON_NAME"
+    mkdir -p "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$scheduled_year/$schedule/$PERSON_NAME"
     cp -a "$LOCATION/." "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$scheduled_year/$schedule/$PERSON_NAME"
 }
 
