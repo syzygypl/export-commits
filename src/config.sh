@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 CONFIG_EXPORTED="yes"
 SRC="$MAIN/src"

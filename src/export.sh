@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 calculate_period() {
     declare month=$1
 

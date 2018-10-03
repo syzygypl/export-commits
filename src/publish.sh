@@ -1,7 +1,9 @@
+#!/usr/bin/env bash
+
 if [ "$CONFIG_EXPORTED" = "" ]; then
     exit;
 fi
-source "$SRC/library";
+source "$SRC/library.sh";
 
 
 PERSON_NAME="DIMA"
@@ -16,7 +18,7 @@ determine_mount_point() {
 }
 
 mount_smb() {
-    osascript -e "mount volume \"smb://$MOUNT\""
+    osascript -e "mount volume \"smb://$MOUNT\"" || error "Cannot mount volume"
     determine_mount_point
     echo "Found mount point: $MOUNT_POINT"
 }
@@ -26,8 +28,8 @@ publish_output() {
     scheduled_year=$2
     destination="$MOUNT_POINT/$EXPORT_PATH_PREFIX/$scheduled_year/$schedule/$PERSON_NAME"
     echo "Publishing to $destination"
-    mkdir -p "$destination"
-    cp -a "$OUTPUT/." "$destination"
+    mkdir -p "$destination" || error "Cannot create $destination"
+    cp -a "$OUTPUT/." "$destination" || error "Cannot copy output to $destination"
 }
 
 publish() {

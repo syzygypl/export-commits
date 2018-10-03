@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if [ "$CONFIG_EXPORTED" = "" ]; then
     exit;
 fi

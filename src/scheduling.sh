@@ -1,8 +1,10 @@
+#!/usr/bin/env bash
+
 if [ "$CONFIG_EXPORTED" = "" ]; then
     exit;
 fi
 
-source "$SRC/library";
+source "$SRC/library.sh";
 
 get_scheduled() {
     scheduled="`date -v-30d +'%Y_%m'`"
