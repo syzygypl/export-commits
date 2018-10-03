@@ -4,7 +4,7 @@ LAUNCH_CONFIG_NAME="com.syzygy.export-commits"
 MAIN_DIR="$HOME/.export-commits"
 LAUNCH_AGENTS="$HOME/Library/LaunchAgents"
 LAUNCH_CONFIG="$LAUNCH_AGENTS/$LAUNCH_CONFIG_NAME.plist"
-LAUNCH_CONFIG_SOURCE="$MAIN_DIR/launch_config"
+LAUNCH_CONFIG_SOURCE="$MAIN_DIR/src/launch_config"
 
 install_repo() {
     cd "$MAIN_DIR"
