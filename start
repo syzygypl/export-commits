@@ -1,9 +1,13 @@
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-SRC="$DIR/src"
+#!/bin/bash
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+MAIN="$DIR"
 set +e
 
+source "$DIR/src/config"
 source "$SRC/scheduling"
+source "$SRC/publish"
+source "$SRC/export"
 
 echo "Pulling last repository version"
 git pull
@@ -11,8 +15,8 @@ git pull
 determine_scheduled
 
 echo "Exporting commits for $scheduled_formatted"
-$DIR/export "$scheduled_formatted"
+export_projects "$scheduled_formatted"
 echo "Publishing for $scheduled"
-$SRC/publish "$scheduled" "$scheduled_year"
+publish "$scheduled" "$scheduled_year"
 
 remember_last_export

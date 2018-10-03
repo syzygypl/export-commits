@@ -1,42 +1,42 @@
-MAIN="$HOME/.export-commits"
-LOCATION="$MAIN/output"
+if [ "$CONFIG_EXPORTED" = "" ]; then
+    exit;
+fi
+source "$SRC/library";
 
-EXPORT_PATH_PREFIX="DIGITAL"
+
 PERSON_NAME="DIMA"
-MOUNT_NAME="nelson"
-MOUNT_SHARE="Dowodowki"
-MOUNT="$MOUNT_NAME/$MOUNT_SHARE"
 
 determine_mount_point() {
     escaped_mount_name="`echo ${MOUNT} | sed 's/\\//\\\\\\//g'`"
     sed_math="'s/^.*$escaped_mount_name on \(.*\) (.*$/\1/p'"
     MOUNT_POINT=$(eval "mount | sed -n $sed_math")
-    echo "$MOUNT_POINT";
+    if [ "$MOUNT_POINT" = "" ]; then
+        error "mount point was not found"
+    fi
 }
 
 mount_smb() {
     osascript -e "mount volume \"smb://$MOUNT\""
     determine_mount_point
+    echo "Found mount point: $MOUNT_POINT"
 }
 
-export() {
+publish_output() {
     schedule=$1
     scheduled_year=$2
-    mkdir -p "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$scheduled_year/$schedule/$PERSON_NAME"
-    cp -a "$LOCATION/." "$MOUNT_POINT/$EXPORT_PATH_PREFIX/$scheduled_year/$schedule/$PERSON_NAME"
+    destination="$MOUNT_POINT/$EXPORT_PATH_PREFIX/$scheduled_year/$schedule/$PERSON_NAME"
+    echo "Publishing to $destination"
+    mkdir -p "$destination"
+    cp -a "$OUTPUT/." "$destination"
 }
 
-testing_output() {
-    mkdir "$LOCATION"
-    echo "1" >> "$LOCATION/test"
+publish() {
+    schedule=$1
+    scheduled_year=$2
+    mount_smb
+    publish_output ${schedule} ${scheduled_year};
 }
 
 main() {
-    schedule=$1
-    scheduled_year=$2
-    credentials
-    mount_smb
-    export ${schedule} ${scheduled_year};
+    publish "$@"
 }
-
-main "$@"

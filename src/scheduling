@@ -1,5 +1,8 @@
-MAIN="$HOME/.export-commits"
-LAST_EXPORT_CACHE="$MAIN/last_export"
+if [ "$CONFIG_EXPORTED" = "" ]; then
+    exit;
+fi
+
+source "$SRC/library";
 
 get_scheduled() {
     scheduled="`date -v-30d +'%Y_%m'`"
@@ -30,8 +33,4 @@ determine_scheduled() {
 remember_last_export() {
     echo "Saving last export: $scheduled";
     echo "$scheduled" > "$LAST_EXPORT_CACHE";
-}
-
-error() {
-    echo "$1"; exit;
 }
