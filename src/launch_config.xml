@@ -11,7 +11,7 @@
             <string>~/.export-commits/start.sh</string>
         </array>
         <key>StartInterval</key>
-        <integer>1</integer>
+        <integer>3600</integer>
         <key>StandardOutPath</key>
         <string>$HOME/.export-commits/log.log</string>
         <key>StandardErrorPath</key>
