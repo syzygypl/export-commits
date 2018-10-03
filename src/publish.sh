@@ -5,9 +5,6 @@ if [ "$CONFIG_EXPORTED" = "" ]; then
 fi
 source "$SRC/library.sh";
 
-
-PERSON_NAME="DIMA"
-
 determine_mount_point() {
     escaped_mount_name="`echo ${MOUNT} | sed 's/\\//\\\\\\//g'`"
     sed_math="'s/^.*$escaped_mount_name on \(.*\) (.*$/\1/p'"
@@ -26,7 +23,7 @@ mount_smb() {
 publish_output() {
     schedule=$1
     scheduled_year=$2
-    destination="$MOUNT_POINT/$EXPORT_PATH_PREFIX/$scheduled_year/$schedule/$PERSON_NAME"
+    destination="$MOUNT_POINT/$EXPORT_PATH_PREFIX/$scheduled_year/$schedule/$NAME"
     echo "Publishing to $destination"
     mkdir -p "$destination" || error "Cannot create $destination"
     cp -a "$OUTPUT/." "$destination" || error "Cannot copy output to $destination"

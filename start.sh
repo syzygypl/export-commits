@@ -5,6 +5,7 @@ MAIN="$DIR"
 set +e
 
 source "$DIR/src/config.sh"
+source "$SRC/user_config.sh"
 source "$SRC/scheduling.sh"
 source "$SRC/publish.sh"
 source "$SRC/export.sh"
