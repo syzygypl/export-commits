@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 REPO="git@github.com:syzygypl/export-commits.git"
 LAUNCH_CONFIG_NAME="com.syzygy.export-commits"
 

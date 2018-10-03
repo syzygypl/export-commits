@@ -8,7 +8,7 @@
         <array>
             <string>bash</string>
             <string>-c</string>
-            <string>~/.export-commits/start</string>
+            <string>~/.export-commits/start.sh</string>
         </array>
         <key>StartInterval</key>
         <integer>84600</integer>
