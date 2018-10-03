@@ -40,7 +40,7 @@ export_launch_config() {
 user_config() {
     read -p "Please provide name to be used as catalog name:" name
     touch "$USER_CONFIG" || exit 1;
-    echo "\$NAME=$name" > "$USER_CONFIG" || exit 1;
+    echo "NAME=\"$name\"" > "$USER_CONFIG" || exit 1;
     echo "Config is exported, if you want to correct it - location is $USER_CONFIG"
 }
 
