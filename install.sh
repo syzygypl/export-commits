@@ -31,8 +31,8 @@ clean() {
 
 export_launch_config() {
     echo "Creating launchctl config at $LAUNCH_CONFIG"
-    rm "$LAUNCH_CONFIG" 2> /dev/null
-    cp "$LAUNCH_CONFIG_SOURCE" "$LAUNCH_CONFIG" || exit 1;
+    HOME_ESCAPED="`echo ${HOME} | sed 's/\\//\\\\\\//g'`"
+    cat "$LAUNCH_CONFIG_SOURCE" | sed "s/\$HOME/$HOME_ESCAPED/" > "$LAUNCH_CONFIG" || exit 1;
     launchctl unload "$LAUNCH_CONFIG" || exit 1;
     launchctl load "$LAUNCH_CONFIG" || exit 1;
 }
