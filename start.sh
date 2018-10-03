@@ -4,6 +4,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 MAIN="$DIR"
 set +e
 
+cd $MAIN
 source "$DIR/src/config.sh"
 source "$SRC/user_config.sh"
 source "$SRC/scheduling.sh"
