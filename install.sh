@@ -10,7 +10,8 @@ LAUNCH_CONFIG_SOURCE="$MAIN_DIR/src/launch_config.xml"
 USER_CONFIG="$MAIN_DIR/src/user_config.sh"
 
 install_repo() {
-    yarn --cwd "$MAIN_DIR"
+    cd "$MAIN_DIR"
+    npm install
 }
 
 prepare_repo() {
