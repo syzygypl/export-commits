@@ -15,6 +15,6 @@
         <key>StandardOutPath</key>
         <string>$HOME/.export-commits/log.log</string>
         <key>StandardErrorPath</key>
-        <string>$HOME/.export-commits/error.log</string>
+        <string>$HOME/.export-commits/log.log</string>
     </dict>
 </plist>
