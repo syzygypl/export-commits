@@ -6,8 +6,10 @@ fi
 source "$SRC/library.sh";
 
 determine_mount_point() {
-    escaped_mount_name="`echo ${MOUNT} | sed 's/\\//\\\\\\//g'`"
-    sed_math="'s/^.*$escaped_mount_name on \(.*\) (.*$/\1/p'"
+    echo "$MOUNT_GREP";
+    escaped_mount_names=$(echo "${MOUNT_GREP}" | sed 's/\//\\\//g')
+    echo "$escaped_mount_names";
+    sed_math="'s/^.*$escaped_mount_names on \(.*\) (.*$/\1/p'"
     MOUNT_POINT=$(eval "mount | sed -n $sed_math")
     if [ "$MOUNT_POINT" = "" ]; then
         error "mount point was not found"
@@ -18,6 +20,7 @@ mount_smb() {
     osascript -e "mount volume \"smb://$MOUNT\"" || error "Cannot mount volume"
     determine_mount_point
     echo "Found mount point: $MOUNT_POINT"
+    exit;
 }
 
 publish_output() {
