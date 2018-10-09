@@ -7,15 +7,15 @@ set +e
 echo "----------------------------------------------------------";
 echo "Starting script at: "$(date)
 
+echo "Pulling last repository version"
+git pull
+
 cd $MAIN
 source "$DIR/src/config.sh"
 source "$SRC/user_config.sh"
 source "$SRC/scheduling.sh"
 source "$SRC/publish.sh"
 source "$SRC/export.sh"
-
-echo "Pulling last repository version"
-git pull
 
 determine_scheduled
 
