@@ -20,7 +20,6 @@ mount_smb() {
     osascript -e "mount volume \"smb://$MOUNT\"" || error "Cannot mount volume"
     determine_mount_point
     echo "Found mount point: $MOUNT_POINT"
-    exit;
 }
 
 publish_output() {
