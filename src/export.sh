@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
 calculate_period() {
     declare month=$1
 
@@ -15,7 +17,7 @@ export_diff() {
     mkdir -p "$(dirname "$target")"
 
     git -C "$project" show "$hash" | head -n 2500 \
-        | ./node_modules/.bin/diff2html --input stdin --file "$target"
+        | $DIR/../bin/node ./node_modules/.bin/diff2html --input stdin --file "$target"
 }
 
 export_project() {

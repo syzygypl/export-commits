@@ -3,6 +3,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 CONFIG_EXPORTED="yes"
 SRC="$MAIN/src"
+BIN="$MAIN/bin"
 OUTPUT="$MAIN/output"
 LAST_EXPORT_CACHE="$MAIN/last_export"
 
