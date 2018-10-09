@@ -38,6 +38,7 @@ echo my-private-project >>excluded.txt
 ## Automated mode
 
 ### Install
+Requirements: node v8 or higher
 ```
  bash -c "curl -s https://raw.githubusercontent.com/syzygypl/export-commits/master/install.sh > /tmp/export-commits && bash \"/tmp/export-commits\"" 
 ```
