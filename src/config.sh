@@ -7,7 +7,7 @@ BIN="$MAIN/bin"
 OUTPUT="$MAIN/output"
 LAST_EXPORT_CACHE="$MAIN/last_export"
 
-MOUNT_NAME="nelson"
+MOUNT_NAME="carl"
 MOUNT_SHARE="Dowodowki"
 MOUNT_SHARE_GREP="[dD]owodowki"
 
