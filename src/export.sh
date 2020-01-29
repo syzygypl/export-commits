@@ -36,7 +36,7 @@ export_project() {
 export_projects() {
     declare month="${1:-$(date -v '-25d' +"%Y-%m")}"
 
-    if [[ ! "$month" =~ ^201[0-9]-[0-9]{2}$ ]]; then
+    if [[ ! "$month" =~ ^20[0-9]{2}-[0-9]{2}$ ]]; then
         echo 'You need to provide the month in YYYY-MM format' >&2
         return 2
     fi
