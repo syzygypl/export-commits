@@ -3,3 +3,4 @@ output
 node_modules
 projects
 src/user_config.sh
+.idea
