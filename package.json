@@ -1,0 +1,50 @@
+{
+  "name": "export-commits",
+  "version": "1.0.0",
+  "description": "General tool for exporting and publishing commits history for some period, (by email configured in git) from given \r projects.\r Works in two modes:\r 1) Manual mode - you have manually execute command and publish results to your nelson server.\r 2) Automated mode - runs script repeatedly in background which exports and publishes your commits every month.",
+  "main": "./lib/index.js",
+  "bin": {
+    "export-commits": "./bin/export-commits"
+  },
+  "scripts": {
+    "start": "npm run build && npm run global",
+    "build": "npm run clean:some && tsc -p .",
+    "global": "npm i -g && export-commits",
+    "clean:some": "rm -rf ./lib ./docs",
+    "docs": "typedoc --out docs ./src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syzygypl/export-commits.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/syzygypl/export-commits/issues"
+  },
+  "homepage": "https://github.com/syzygypl/export-commits#readme",
+  "devDependencies": {
+    "@liftr/tscov": "^2.0.0",
+    "@types/figlet": "^1.5.4",
+    "@types/inquirer": "^8.2.1",
+    "@types/node": "^18.0.3",
+    "diff2html": "^3.4.17",
+    "directory-tree": "^3.3.0",
+    "inquirer-date-prompt": "^2.0.1",
+    "simple-git": "^3.10.0",
+    "ts-node": "^10.8.2",
+    "tslib": "^2.4.0",
+    "typedoc": "^0.23.6",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "date-fns": "^2.28.0",
+    "figlet": "^1.5.2",
+    "fs-extra": "^10.1.0",
+    "inquirer": "^8.2.0",
+    "inversify": "^6.0.1",
+    "kleur": "^4.1.5",
+    "reflect-metadata": "^0.1.13"
+  }
+}
