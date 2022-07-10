@@ -1,4 +1,6 @@
-
+<p align="center">
+ <img height="400px" src="export-commits.gif?sanitize=true">
+</p>
 
 # Export commit history
 
