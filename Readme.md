@@ -22,9 +22,9 @@ yarn
 git config user.email "MY_NAME@example.com"
 mkdir projects
 # create symlinks to your projects (with UNIX shell)
-ln -s ~/Sites/example.com projects/ 
+ln -s ~/path-to-your-project/example projects/ 
 # create symlinks to your projects (as administrator on WINDOWS - CMD)
-mklink projects\PROJECT_NAME ..\PROJECT_NAME
+mklink projects\PROJECT_NAME ~/path-to-your-project/example
 ```
 
 ### Run
