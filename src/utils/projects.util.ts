@@ -7,6 +7,7 @@ import simpleGit from "simple-git";
 import {Commit} from "../models/commit";
 import {diffTemplate} from "../templates/diff";
 const Diff2html = require('diff2html');
+const path = require('path');
 
 export function exportDiff(project: Project, commits: Commit[], until: Date, evidenceFolder: string) {
     commits.forEach(async (commit: Commit) => {
@@ -38,13 +39,19 @@ export async function exportProject(project: Project, since: Date, until: Date, 
 }
 
 export async function exportProjects(date: Date, evidenceFolder: string): Promise<Project[]> {
-    const projectsPath = process.cwd() + '/projects';
-    const projects: Project[] = fs.readdirSync(projectsPath).filter(function (file) {
-        return fs.statSync(projectsPath+'/'+file).isDirectory();
-    }).map((project: string) => ({
-        name: project,
-        path: `/projects/${project}`
-    }));
+    const projectsPath = path.join(process.cwd(), 'projects');
+    const projects: Project[] = fs.readdirSync(projectsPath)
+        .filter(function (file) {
+            const statSyncDirOnSymlink = fs.lstatSync(path.join(projectsPath, file));
+            return statSyncDirOnSymlink.isDirectory() || statSyncDirOnSymlink.isSymbolicLink();
+         })
+        .map((project: string) => {
+            const projectPathOrSymlink = path.join(projectsPath, project);
+            return ({
+                name: project,
+                path: fs.lstatSync(projectPathOrSymlink).isSymbolicLink() ? fs.readlinkSync(projectPathOrSymlink) : projectPathOrSymlink
+            });
+        });
 
     const until = new Date(addMonths(date, 1));
     const since = date;
