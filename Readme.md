@@ -27,6 +27,13 @@ ln -s ~/path-to-your-project/example projects/
 mklink projects\PROJECT_NAME ~/path-to-your-project/example
 ```
 
+Alternatively, link all your projects at once and exclude some
+
+```
+ln -s ~/Sites projects
+echo my-private-project >>excluded.txt
+```
+
 ### Run
 First time you need to run:
 ```bash
@@ -35,19 +42,6 @@ npm start
 After that, the library will be installed and you will be able to use it from now on through:
 ```bash
 export-commits
-```
-
-Alternatively, link all your projects at once and exclude some
-
-```
-ln -s ~/Sites projects
-echo my-private-project >>excluded.txt
-```
-
-## Run
-
-```
-./export "2017-10"
 ```
 
 ## Automated mode
