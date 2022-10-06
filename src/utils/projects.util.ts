@@ -11,8 +11,8 @@ const path = require('path');
 
 export function exportDiff(project: Project, commits: Commit[], until: Date, evidenceFolder: string) {
     commits.forEach(async (commit: Commit) => {
-        const target = process.cwd() + `/${evidenceFolder}/${until.getFullYear()}/${until.getMonth()}/${project.name}/${commit.hash}.html`;
-        const diff = await simpleGit(`./${project.path}`).show(commit.hash);
+        const target = path.join(process.cwd(), evidenceFolder, until.getFullYear(), until.getMonth(), project.name, `${commit.hash}.html`);
+        const diff = await simpleGit(path.join(project.path)).show(commit.hash);
         const diffJson = Diff2html.parse(diff);
         const diffHtml = Diff2html.html(diffJson, {
             drawFileList: true,
@@ -26,9 +26,9 @@ export function exportDiff(project: Project, commits: Commit[], until: Date, evi
 
 export async function exportProject(project: Project, since: Date, until: Date, evidenceFolder: string): Promise<any> {
     const author = await getAuthor(project.path);
-    fs.mkdirSync(process.cwd() + `/${evidenceFolder}/${until.getFullYear()}/${until.getMonth()}/${project.name}`, { recursive: true });
+    fs.mkdirSync(path.join(process.cwd(), evidenceFolder, until.getFullYear(), until.getMonth(), project.name), { recursive: true });
     showInfo(`Generating history for ${project.name} between ${since.toISOString()} - ${until.toISOString()}`);
-    const commits = await simpleGit(`./${project.path}`).log([
+    const commits = await simpleGit(path.join(project.path)).log([
         `--author=${author.trim()}`,
         '--no-merges',
         '--branches',
