@@ -18,18 +18,13 @@ yarn
 ```
 
 ### Configure
-```
+```bash
 git config user.email "MY_NAME@example.com"
 mkdir projects
 # create symlinks to your projects (with UNIX shell)
 ln -s ~/path-to-your-project/example projects/ 
 # create symlinks to your projects (as administrator on WINDOWS - CMD)
 mklink projects\PROJECT_NAME ~/path-to-your-project/example
-```
-
-### Run
-```
-npm start
 ```
 
 Alternatively, link all your projects at once and exclude some
@@ -39,10 +34,14 @@ ln -s ~/Sites projects
 echo my-private-project >>excluded.txt
 ```
 
-## Run
-
+### Run
+First time you need to run:
+```bash
+npm start
 ```
-./export "2017-10"
+After that, the library will be installed and you will be able to use it from now on through:
+```bash
+export-commits
 ```
 
 ## Automated mode
