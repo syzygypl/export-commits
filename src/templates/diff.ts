@@ -1,9 +1,9 @@
-export const diffTemplate = (diff: string): string => {
+export const diffTemplate = (diff: string, author: string): string => {
     return `<!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Diff to HTML by Pawel Boguslawski & Adam Krupa</title>
+        <title>Diff by ${author}</title>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/github.min.css">  
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" />
@@ -21,10 +21,12 @@ export const diffTemplate = (diff: string): string => {
         </script>
     </head>
     <body style="text-align: center; font-family: 'Source Sans Pro',sans-serif;">
-        <h1>Diff to HTML by <a href="https://github.com/bogusweb">Pawel Boguslawski</a> & <a href="https://github.com/adamkrupa-syzygy">Adam Krupa</a></h1>
+        <h1>Diff by ${author}</h1>
         <div id="diff">
             ${diff}
         </div>
+        
+        <span style="font-size: 12px">Diff to HTML by <a href="https://github.com/bogusweb">Pawel Boguslawski</a> & <a href="https://github.com/adamkrupa-syzygy">Adam Krupa</a></span>
     </body>
 </html>`
 }

@@ -9,7 +9,7 @@ import {diffTemplate} from "../templates/diff";
 const Diff2html = require('diff2html');
 const path = require('path');
 
-export function exportDiff(project: Project, commits: Commit[], until: Date, evidenceFolder: string) {
+export function exportDiff(project: Project, commits: Commit[], until: Date, evidenceFolder: string, author: string) {
     commits.forEach(async (commit: Commit) => {
         const target = path.join(process.cwd(), evidenceFolder, `${until.getFullYear()}`, `${until.getMonth()}`, project.name, `${commit.hash}.html`);
         const diff = await simpleGit(path.join(project.path)).show(commit.hash);
@@ -18,7 +18,7 @@ export function exportDiff(project: Project, commits: Commit[], until: Date, evi
             drawFileList: true,
             matching: 'lines'
         });
-        fs.writeFile(target, diffTemplate(diffHtml), () => {});
+        fs.writeFile(target, diffTemplate(diffHtml, author), () => {});
     });
 
     showSuccess('Generated');
@@ -35,7 +35,7 @@ export async function exportProject(project: Project, since: Date, until: Date, 
         `--since=${since.toISOString()}`,
         `--until=${until.toISOString()}`
     ]);
-    exportDiff(project, commits.all as Commit[], until, evidenceFolder);
+    exportDiff(project, commits.all as Commit[], until, evidenceFolder, author);
 }
 
 export async function exportProjects(date: Date, evidenceFolder: string): Promise<Project[]> {
